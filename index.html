@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobrador de Morosos · Se abre el bote</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="fondo">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <main class="escenario">
+
+        <!-- ========== VISTA 1: PEDIR NOMBRE ========== -->
+        <section id="vista-login" class="tarjeta activa">
+            <div class="badge"><div class="badge-circulo">💼</div></div>
+            <h1 class="titulo">COBRADOR<span>DE MOROSOS</span></h1>
+            <p class="fecha-bote" id="fecha-bote"></p>
+            <p class="subtitulo">Identifícate para consultar el estado de tu deuda con el bote del almuerzo.</p>
+            <div class="campo">
+                <input type="text" id="input-nombre" placeholder="Escribe tu nombre" autocomplete="off" spellcheck="false">
+            </div>
+            <button id="btn-comprobar" class="boton"><span>Comprobar</span></button>
+            <button id="btn-historico" class="boton boton-listado"><span>🗂️ Ver histórico de botes</span></button>
+            <p id="mensaje-error" class="error"></p>
+        </section>
+
+        <!-- ========== VISTA 2: ERES MOROSO ========== -->
+        <section id="vista-moroso" class="tarjeta moroso">
+            <div class="sirena"></div>
+            <h2 class="alerta">⚠ MOROSO DETECTADO ⚠</h2>
+            <p class="nombre-moroso" id="nombre-moroso"></p>
+            <div class="marco-imagen">
+                <img src="imagen.jpg" alt="Se abre el bote" id="img-cobrador">
+            </div>
+            <p class="aviso">Tienes una deuda pendiente con el bote. El cobrador ya está en tu puerta.</p>
+
+            <button id="btn-pagar" class="boton boton-pagar"><span>💰 Dejar de ser moroso</span></button>
+
+            <div id="zona-tesorero" class="zona-tesorero">
+                <p class="nota-tesorero">🔒 El pago debe ser aprobado por el <strong>tesorero</strong>.</p>
+                <div class="campo">
+                    <input type="password" id="input-tesorero" placeholder="Contraseña del tesorero" autocomplete="off">
+                </div>
+                <div class="fila-botones">
+                    <button id="btn-cancelar-pago" class="boton boton-secundario"><span>Cancelar</span></button>
+                    <button id="btn-confirmar-pago" class="boton boton-pagar"><span>Aprobar pago</span></button>
+                </div>
+                <p id="error-tesorero" class="error"></p>
+            </div>
+
+            <button id="btn-listado-moroso" class="boton boton-listado"><span>📋 Ver listado completo</span></button>
+            <button id="btn-volver-moroso" class="link-volver">← Volver</button>
+        </section>
+
+        <!-- ========== VISTA 3: PAGADO ========== -->
+        <section id="vista-pagado" class="tarjeta pagado">
+            <div class="check-wrap">
+                <svg class="check" viewBox="0 0 52 52">
+                    <circle class="check-circulo" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="check-tick" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
+            <h2 class="titulo-ok">¡AL DÍA!</h2>
+            <p class="nombre-ok" id="nombre-ok"></p>
+            <p class="subtitulo">Ya no eres moroso. El bote te lo agradece. 🍾</p>
+            <button id="btn-listado-pagado" class="boton boton-listado"><span>📋 Ver listado completo</span></button>
+            <button id="btn-volver" class="boton boton-secundario"><span>Volver al inicio</span></button>
+        </section>
+
+        <!-- ========== VISTA 6: LISTADO COMPLETO (solo lectura) ========== -->
+        <section id="vista-listado" class="tarjeta">
+            <h2 class="titulo-listado">LISTADO DEL BOTE</h2>
+            <p class="resumen-listado" id="resumen-listado"></p>
+            <div id="lista-completa" class="lista-admin"></div>
+            <button id="btn-volver-listado" class="boton boton-secundario"><span>← Volver</span></button>
+        </section>
+
+        <!-- ========== VISTA 7: HISTÓRICO DE BOTES ========== -->
+        <section id="vista-historico" class="tarjeta">
+            <h2 class="titulo-listado">HISTÓRICO DE BOTES</h2>
+            <p class="subtitulo">Botes anteriores y quién pagó en cada uno.</p>
+            <div id="lista-historico" class="lista-historico"></div>
+            <button id="btn-volver-historico" class="boton boton-secundario"><span>← Volver</span></button>
+        </section>
+
+        <!-- ========== VISTA 4: LOGIN ADMIN ========== -->
+        <section id="vista-admin-pass" class="tarjeta admin">
+            <div class="badge"><div class="badge-circulo badge-admin">🛡️</div></div>
+            <h2 class="titulo-admin">ADMINISTRADOR</h2>
+            <p class="subtitulo">Introduce la contraseña de administrador.</p>
+            <div class="campo">
+                <input type="password" id="input-admin-pass" placeholder="Contraseña de administrador" autocomplete="off">
+            </div>
+            <button id="btn-admin-login" class="boton"><span>Entrar</span></button>
+            <button id="btn-volver-admin-pass" class="link-volver">← Volver</button>
+            <p id="error-admin-pass" class="error"></p>
+        </section>
+
+        <!-- ========== VISTA 5: PANEL ADMIN ========== -->
+        <section id="vista-admin-panel" class="tarjeta admin admin-panel">
+            <h2 class="titulo-admin">PANEL DE CONTROL</h2>
+            <p class="subtitulo">Gestiona la lista de morosos.</p>
+
+            <div id="lista-admin" class="lista-admin"></div>
+
+            <div class="anadir-fila">
+                <input type="text" id="input-nuevo-nombre" placeholder="Nuevo nombre" autocomplete="off">
+                <button id="btn-anadir" class="boton boton-mini"><span>Añadir</span></button>
+            </div>
+
+            <button id="btn-resetear" class="boton boton-reset"><span>🔒 Cerrar bote y abrir uno nuevo</span></button>
+            <button id="btn-historico-admin" class="boton boton-listado"><span>🗂️ Ver / borrar histórico</span></button>
+            <button id="btn-salir-admin" class="boton boton-secundario"><span>Salir</span></button>
+            <p id="error-admin-panel" class="error"></p>
+        </section>
+
+    </main>
+
+    <canvas id="confeti"></canvas>
+    <script src="script.js"></script>
+</body>
+</html>
